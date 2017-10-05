@@ -7,13 +7,6 @@ MAINTAINER Felix Kerekes <felix@rebs-group.com>
 RUN mkdir /app
 WORKDIR /app
 
-# Install Debian dependencies
-#RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-#  apt-get install -y --no-install-recommends \
-#  libjpeg8-dev \
-#  && apt-get clean \
-#  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 
 # Install npm dependencies
 COPY package.json .
