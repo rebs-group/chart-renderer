@@ -22,7 +22,7 @@ function getColourScheme(length) {
   }
 
   return colourScheme;
-};
+}
 
 
 // Parse any content type as JSON
@@ -36,12 +36,12 @@ app.post('/', function (req, res) {
 
   if ( !data.width || !data.height ) {
     res.status(400).send('Missing width and/or height');
-    return
+    return;
   }
 
   if ( !data.options ) {
     res.status(400).send('Missing options');
-    return
+    return;
   }
 
   // Fill the canvas with a white background. Otherwise it will render using a transparent background
@@ -84,23 +84,24 @@ app.post('/', function (req, res) {
           ctx.fillText(percent, model.x + x, model.y + y + 15);
         }
       });
-    }
-
+    };
   }
 
   // Add the plugins to options, so that the chart background is properly rendered
   data.options.plugins = plugins;
 
-  var chartNode = new chartjsNode(data.width, data.height);
+  var chartNode = new chartjsNode(data.width, data.height),
+      colourScheme,
+      i;
 
   // Populate datasets with random colours
   if (data.options.data.datasets.length > 1) {
     // Multiple datasets
     // Each dataset will get its own colour
-    var colourScheme = getColourScheme(data.options.data.datasets.length);
+    colourScheme = getColourScheme(data.options.data.datasets.length);
 
-    for (var i = 0; i < data.options.data.datasets.length; i++) {
-      var datasetColor= colourScheme[i];;
+    for (i = 0; i < data.options.data.datasets.length; i++) {
+      var datasetColor= colourScheme[i];
       data.options.data.datasets[i].backgroundColor = [];
 
       for (var j = 0; j < data.options.data.datasets[i].data.length; j++) {
@@ -110,10 +111,10 @@ app.post('/', function (req, res) {
   } else {
     // A single dataset
     // Each value in the dataset will get its own colour
-    var colourScheme = getColourScheme(data.options.data.labels.length);
+    colourScheme = getColourScheme(data.options.data.labels.length);
 
     data.options.data.datasets[0].backgroundColor = [];
-    for (var i = 0; i < data.options.data.datasets[0].data.length; i++) {
+    for (i = 0; i < data.options.data.datasets[0].data.length; i++) {
       data.options.data.datasets[0].backgroundColor.push(colourScheme[i]);
     }
   }
@@ -123,9 +124,9 @@ app.post('/', function (req, res) {
     return chartNode.getImageBuffer('image/png');
   }).then(buffer => {
     // Return the image buffer
-    res.send(buffer)
+    res.send(buffer);
   });
-})
+});
 
 app.listen(3000);
 
