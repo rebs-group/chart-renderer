@@ -125,6 +125,7 @@ app.post('/', function (req, res) {
   }).then(buffer => {
     // Return the image buffer
     res.send(buffer);
+    chartNode.destroy();
   });
 });
 
