@@ -3,6 +3,11 @@ const bodyParser = require('body-parser');
 const Chart = require('chart.js');
 const chartjsNode = require('chartjs-node');
 const palette = require('./palette');
+const memwatch = require('memwatch-next');
+
+memwatch.on('leak', function(info) { console.log('LEAK FOUND!', info); });
+
+memwatch.on('stats', function(stats) { console.log('Stats:', stats); });
 
 const app = express();
 
@@ -32,7 +37,12 @@ app.use(bodyParser.json({
 
 
 app.post('/', function (req, res) {
+
+  var hd = new memwatch.HeapDiff();
+
   var data = req.body;
+
+  console.log('RENDERING CHART WITH > ', data);
 
   if ( !data.width || !data.height ) {
     res.status(400).send('Missing width and/or height');
@@ -126,8 +136,18 @@ app.post('/', function (req, res) {
     // Return the image buffer
     res.send(buffer);
     chartNode.destroy();
+    delete chartNode;
   });
+
+  var diff = hd.end();
+  console.log('Heap Diff :: >> ', diff);
+
+  for (var i = diff.change.details.length - 1; i >= 0; i--) {
+    console.log('Details :: ', diff.change.details[i]);
+  }
 });
+
+
 
 app.listen(3000);
 
