@@ -21,7 +21,6 @@
     "chart.js": "^2.6.0",
     "chartjs-node": "^1.6.0",
     "express": "^4.16.1",
-    "memwatch-next": "^0.3.0",
     "node-gyp": "^3.6.2"
   }
 }
