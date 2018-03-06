@@ -1,6 +1,6 @@
 {
   "name": "chart-renderer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A web service that renders Chart.js charts as static images",
   "main": "app.js",
   "scripts": {
@@ -18,8 +18,8 @@
   "homepage": "https://github.com/rebs-group/chart-renderer#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "chart.js": "^2.6.0",
-    "chartjs-node": "^1.6.0",
+    "chart.js": "^2.7.2",
+    "chartjs-node": "git://github.com/rebsgroup/chartjs-node#f97b875eb7cb432e85cbbd7da150dd79fd44bd0e",
     "express": "^4.16.1",
     "node-gyp": "^3.6.2"
   }
