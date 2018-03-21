@@ -95,7 +95,7 @@ app.post('/', function (req, res) {
       i;
 
   // Populate datasets with random colours
-  if (data.options.data.datasets.length > 1) {
+  if ( (data.options.data.datasets.length > 1) || data.options.singleColor ) {
     // Multiple datasets
     // Each dataset will get its own colour
     colourScheme = getColourScheme(data.options.data.datasets.length);
