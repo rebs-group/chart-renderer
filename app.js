@@ -129,5 +129,9 @@ app.post('/', function (req, res) {
   });
 });
 
+app.get('/health/', function(req, res) {
+  res.send('Health OK!');
+});
+
 app.listen(3000);
 
