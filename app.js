@@ -4,6 +4,12 @@ const Chart = require('chart.js');
 const chartjsNode = require('chartjs-node');
 const palette = require('./palette');
 
+// Sometimes randomly fails for some inputs with a "not defined" error.
+// See https://github.com/vmpowerio/chartjs-node/issues/26#issuecomment-354383865
+if (global.CanvasGradient === undefined) {
+  global.CanvasGradient = function() {};
+}
+
 const app = express();
 
 
