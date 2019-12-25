@@ -8,6 +8,10 @@ RUN mkdir /app
 WORKDIR /app
 
 
+# Install package dependencies
+RUN apt-get update && apt-get install -y libgif-dev
+
+
 # Install npm dependencies
 COPY package.json .
 COPY package-lock.json .
